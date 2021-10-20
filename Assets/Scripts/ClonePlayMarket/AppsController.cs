@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ClonePlayMarket
+namespace Tasks.UI
 {
     public class AppsController : MonoBehaviour
     {

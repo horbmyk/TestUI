@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ClonePlayMarket
+namespace Tasks.UI
 {
     public class SettingsButton : MonoBehaviour
     {

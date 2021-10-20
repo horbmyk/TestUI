@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuController : MonoBehaviour
+namespace Tasks.UI
 {
-    [SerializeField] private GameObject PrefabItemMainMenu;
-    [SerializeField] private Transform ContentMainMenu;
-
-    private void Awake()
+    public class MainMenuController : MonoBehaviour
     {
-        for (int i = 0; i < 15; i++)
+        [SerializeField] private GameObject PrefabItemMainMenu;
+        [SerializeField] private Transform ContentMainMenu;
+
+        private void Awake()
         {
-            GameObject itemMainMenu = Instantiate(PrefabItemMainMenu, ContentMainMenu.transform);
-            itemMainMenu.GetComponentInChildren<Text>().text = "Item Menu " + (i + 1).ToString();
+            for (int i = 0; i < 15; i++)
+            {
+                GameObject itemMainMenu = Instantiate(PrefabItemMainMenu, ContentMainMenu.transform);
+                itemMainMenu.GetComponentInChildren<Text>().text = "Item Menu " + (i + 1).ToString();
+            }
         }
     }
 }
