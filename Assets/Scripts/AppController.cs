@@ -12,7 +12,6 @@ namespace Tasks.UI
         [SerializeField] private Text _rating;
         private Sprite _logoImage;
 
-
         public Text Name
         {
             get => _name;
