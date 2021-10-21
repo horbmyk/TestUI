@@ -5,6 +5,9 @@ namespace Tasks.UI
 {
     public class AppController : MonoBehaviour
     {
+        public delegate void DelegateAppsController(Sprite logo, string description);//
+        private DelegateAppsController _delegateAppsController;//
+        [SerializeField] private ChoiseAppController _choiseAppController;
         [SerializeField] private Text _description;
         [SerializeField] private Text _sequenceNumber;
         private Sprite _logoImage;
@@ -22,21 +25,23 @@ namespace Tasks.UI
             set => _ = value;
         }
 
-        public Sprite logoImage
+        public Sprite LogoImage
         {
             get => _logoImage;
             set => _ = value;
         }
 
-        public void Initialization(string description, string sequenceNumber, Sprite logoImage)
+        public void Initialization(string description, string sequenceNumber, Sprite logoImage, DelegateAppsController delegateAppsController)
         {
             Description.text = "  " + description;
             SequenceNumber.text = "  " + sequenceNumber;
             _logoImage = logoImage;
+            _delegateAppsController = delegateAppsController;
         }
-        public void OnClick()//
+
+        public void OnClick()
         {
-            Debug.Log("You Chose " + Description.text);
+            _delegateAppsController?.Invoke(LogoImage, Description.text);
         }
     }
 }
