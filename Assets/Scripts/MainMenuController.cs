@@ -13,7 +13,7 @@ namespace Tasks.UI
             for (int i = 0; i < 15; i++)
             {
                 GameObject itemMainMenu = Instantiate(PrefabItemMainMenu, ContentMainMenu.transform);
-                itemMainMenu.GetComponentInChildren<Text>().text = "Item Menu " + (i + 1).ToString();
+                itemMainMenu.GetComponentInChildren<Text>().text = "Item Account " + (i + 1).ToString();
             }
         }
     }
