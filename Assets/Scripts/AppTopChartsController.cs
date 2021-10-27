@@ -3,12 +3,13 @@ using UnityEngine.UI;
 
 namespace Tasks.UI
 {
-    public class AppController : MonoBehaviour
+    public class AppTopChartsController : MonoBehaviour
     {
         public delegate void AppsControllerOnClick(Sprite logo, string name, string rating);
         private AppsControllerOnClick _appsControllerOnClick;
         [SerializeField] private Text _name;
-        [SerializeField] private Text _size;
+        [SerializeField] private Text _sequenceNumber;
+        [SerializeField] private Text _rating;
         private Sprite _logoImage;
 
         public Text Name
@@ -17,30 +18,36 @@ namespace Tasks.UI
             set => _name = value;
         }
 
+        public Text SequenceNumber
+        {
+            get => _sequenceNumber;
+            set => _ = value;
+        }
+
         public Sprite LogoImage
         {
             get => _logoImage;
             set => _ = value;
         }
 
-        public Text Size
+        public Text Rating
         {
-            get => _size;
+            get => _rating;
             set => _ = value;
         }
 
-        public void Initialization(string name, string sequenceNumber, Sprite logoImage, string size, AppsControllerOnClick appsControllerOnClick)
+        public void Initialization(string name, string sequenceNumber, Sprite logoImage, string rating, AppsControllerOnClick appsControllerOnClick)
         {
             Name.text = "  " + name;
+            SequenceNumber.text = "  " + sequenceNumber;
             _logoImage = logoImage;
-            _size.text = size + " MB ";
+            _rating.text = " Rating: " + rating;
             _appsControllerOnClick = appsControllerOnClick;
         }
 
         public void OnClick()
         {
-            _appsControllerOnClick?.Invoke(LogoImage, Name.text, Size.text);
+            _appsControllerOnClick?.Invoke(LogoImage, Name.text, Rating.text);
         }
     }
-
 }
