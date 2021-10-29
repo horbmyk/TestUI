@@ -29,7 +29,7 @@ namespace Tasks.UI
             set => _ = value;
         }
 
-        public void Initialization(string name, string sequenceNumber, Sprite logoImage, string size, AppsControllerOnClick appsControllerOnClick)
+        public void Initialization(string name, Sprite logoImage, string size, AppsControllerOnClick appsControllerOnClick)
         {
             Name.text = "  " + name;
             _logoImage = logoImage;

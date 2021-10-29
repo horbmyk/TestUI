@@ -10,6 +10,7 @@ namespace Tasks.UI
         [SerializeField] private GameObject _prefabItem;
         [SerializeField] private GameObject _settingButton;
         [SerializeField] private GameObject _backAppsButton;
+        [SerializeField] private GameObject _appsPage;
 
         private void Start()
         {
@@ -19,15 +20,12 @@ namespace Tasks.UI
 
         private void InitializationApps()
         {
-            var _sequenceNumber = 1;
-
             foreach (var item in _imagesSource)
             {
                 GameObject itemSources = Instantiate(_prefabItem, transform);
                 itemSources.GetComponent<Image>().sprite = item;
                 var rating = Random.Range(1, 5);
-                itemSources.GetComponent<AppController>().Initialization(item.name, _sequenceNumber.ToString(), item, rating.ToString(), SelectedApp);
-                _sequenceNumber++;
+                itemSources.GetComponent<AppController>().Initialization(item.name, item, rating.ToString(), SelectedApp);
             }
         }
 
@@ -35,7 +33,7 @@ namespace Tasks.UI
         {
             _backAppsButton.SetActive(true);
             _settingButton.SetActive(false);
-            gameObject.SetActive(false);
+            _appsPage.SetActive(false);
             _choiseAppController.SelectedApp(logo, name, rating);
         }
     }
