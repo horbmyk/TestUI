@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 50224954}
   - component: {fileID: 50224953}
   m_Layer: 5
-  m_Name: Text
+  m_Name: GooglePlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 287415718}
   - component: {fileID: 287415717}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Choised
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 954145671}
   - component: {fileID: 954145670}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Choised
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
