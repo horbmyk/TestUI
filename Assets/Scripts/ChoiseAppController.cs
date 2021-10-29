@@ -6,7 +6,7 @@ namespace Tasks.UI
     public class ChoiseAppController : MonoBehaviour
     {
         [SerializeField] private GameObject _layout;
-        [SerializeField] private GameObject _screens;
+        [SerializeField] private GameObject _screensContent;
         [SerializeField] private GameObject _prefabItemScreen;
         [SerializeField] private Image _logo;
         [SerializeField] private Text _name;
@@ -24,14 +24,14 @@ namespace Tasks.UI
             _layout.SetActive(true);
             _logo.sprite = logo;
             _name.text = name;
-            _description.text = "Description About" + name;
+            _description.text = "Description About" + name + " :";
             _rating.text = rating;
 
-            foreach (Transform child in _screens.transform) Destroy(child.gameObject);
+            foreach (Transform child in _screensContent.transform) Destroy(child.gameObject);
 
             for (int i = 0; i < 5; i++)
             {
-                GameObject itemscreen = Instantiate(_prefabItemScreen, _screens.transform);
+                GameObject itemscreen = Instantiate(_prefabItemScreen, _screensContent.transform);
                 itemscreen.GetComponent<ItemScreenController>().Initialization(logo);
             }
 
