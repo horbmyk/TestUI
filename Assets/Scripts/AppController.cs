@@ -8,7 +8,7 @@ namespace Tasks.UI
         public delegate void AppsControllerOnClick(Sprite logo, string name, string rating);
         private AppsControllerOnClick _appsControllerOnClick;
         [SerializeField] private Text _name;
-        [SerializeField] private Text _size;
+        [SerializeField] private Text _rating;
         private Sprite _logoImage;
 
         public Text Name
@@ -23,23 +23,23 @@ namespace Tasks.UI
             set => _ = value;
         }
 
-        public Text Size
+        public Text Rating
         {
-            get => _size;
+            get => _rating;
             set => _ = value;
         }
 
-        public void Initialization(string name, Sprite logoImage, string size, AppsControllerOnClick appsControllerOnClick)
+        public void Initialization(string name, Sprite logoImage, string rating, AppsControllerOnClick appsControllerOnClick)
         {
             Name.text = "  " + name;
             _logoImage = logoImage;
-            _size.text = size + " MB ";
+            _rating.text = rating;
             _appsControllerOnClick = appsControllerOnClick;
         }
 
         public void OnClick()
         {
-            _appsControllerOnClick?.Invoke(LogoImage, Name.text, Size.text);
+            _appsControllerOnClick?.Invoke(LogoImage, Name.text, Rating.text);
         }
     }
 

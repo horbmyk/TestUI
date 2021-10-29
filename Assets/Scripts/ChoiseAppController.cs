@@ -11,8 +11,9 @@ namespace Tasks.UI
         [SerializeField] private Image _logo;
         [SerializeField] private Text _name;
         [SerializeField] private Text _description;
+        [TextArea] [SerializeField] private string _longDescription;
         [SerializeField] private Text _rating;
-
+        [SerializeField] private Text _ratingHead;
 
         private void Awake()
         {
@@ -24,8 +25,10 @@ namespace Tasks.UI
             _layout.SetActive(true);
             _logo.sprite = logo;
             _name.text = name;
-            _description.text = "Description About" + name + " :";
+            _description.text = "Description About" + name + " :\n \n" + _longDescription;
+            _description.GetComponent<ContentSizeFitter>().enabled = true;
             _rating.text = rating;
+            _ratingHead.text = rating;
 
             foreach (Transform child in _screensContent.transform) Destroy(child.gameObject);
 
