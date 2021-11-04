@@ -105,6 +105,7 @@ MonoBehaviour:
   _prefabItem: {fileID: 4592568554674239701, guid: b75066f82317ded4bad5646d601adff2, type: 3}
   _settingButton: {fileID: 0}
   _backAppsButton: {fileID: 0}
+  _appsPage: {fileID: 0}
 --- !u!1 &2136580573303134376
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,8 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.43137255}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
