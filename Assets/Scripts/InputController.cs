@@ -4,44 +4,84 @@ using UnityEngine.UI;
 
 namespace Tasks.UI
 {
-    public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InputController : ScrollRect
     {
-        [SerializeField] private Image _panelInput;
-        [SerializeField] private RectTransform _panelGroups;
+        private ScrollRect _parentScroll;
+        private bool _draggingParent = false;
 
-        public void OnBeginDrag(PointerEventData eventData)
+        protected override void Awake()
         {
-            // _panelInput.raycastTarget = false;
+            base.Awake();
+            _parentScroll = GetScrollParent(transform);
         }
 
-        public void OnDrag(PointerEventData eventData)
+        public override void OnInitializePotentialDrag(PointerEventData eventData)
         {
-            if (Mathf.Abs(eventData.delta.x) > Mathf.Abs(eventData.delta.y))
+            base.OnInitializePotentialDrag(eventData);
+            _parentScroll?.OnInitializePotentialDrag(eventData);
+        }
+
+        private ScrollRect GetScrollParent(Transform t)
+        {
+            if (t.parent != null)
             {
-                _panelInput.raycastTarget = false;
-
-                if (eventData.delta.x > 0)
-                {
-                    Debug.Log("x  " + eventData.delta.x);
-                }
-
-                if (eventData.delta.x < 0)
-                {
-                    Debug.Log("x  " + eventData.delta.x);
-                }
+                ScrollRect scroll = t.parent.GetComponent<ScrollRect>();
+                if (scroll != null) return scroll;
+                else return GetScrollParent(t.parent);
             }
+            return null;
+        }
 
-            if (Mathf.Abs(eventData.delta.x) < Mathf.Abs(eventData.delta.y))
+        private bool IsPotentialParentDrag(Vector2 inputDelta)
+        {
+            if (_parentScroll != null)
             {
-                Debug.Log("y  " + eventData.delta.y);
-                _panelInput.raycastTarget = true;
-                _panelGroups.localPosition += new Vector3(0, eventData.delta.y, 0);
+                if (_parentScroll.horizontal && !_parentScroll.vertical)
+                {
+                    return Mathf.Abs(inputDelta.x) > Mathf.Abs(inputDelta.y);
+                }
+                if (!_parentScroll.horizontal && _parentScroll.vertical)
+                {
+                    return Mathf.Abs(inputDelta.x) < Mathf.Abs(inputDelta.y);
+                }
+                else return true;
+            }
+            return false;
+        }
+
+        public override void OnBeginDrag(PointerEventData eventData)
+        {
+            if (IsPotentialParentDrag(eventData.delta))
+            {
+                _parentScroll.OnBeginDrag(eventData);
+                _draggingParent = true;
+            }
+            else
+            {
+                base.OnBeginDrag(eventData);
             }
         }
 
-        public void OnEndDrag(PointerEventData eventData)
+        public override void OnDrag(PointerEventData eventData)
         {
-            _panelInput.raycastTarget = true;
+            if (_draggingParent)
+            {
+                _parentScroll.OnDrag(eventData);
+            }
+            else
+            {
+                base.OnDrag(eventData);
+            }
+        }
+
+        public override void OnEndDrag(PointerEventData eventData)
+        {
+            base.OnEndDrag(eventData);
+            if (_parentScroll != null && _draggingParent)
+            {
+                _draggingParent = false;
+                _parentScroll.OnEndDrag(eventData);
+            }
         }
     }
 }
